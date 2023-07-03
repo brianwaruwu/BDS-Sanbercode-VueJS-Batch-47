@@ -1,6 +1,0 @@
-Data Peserta Bootcamp Digital Skill - VueJS Frontend Development
-1. Nama: Brian Alfret Bohouni waruwu
-2. Email: brianwar@gmail.com
-3. Sistem Operasi yang digunakan: win 10
-4. Akun Gitlab/Github: https://github.com/brianwaruwu  
-5. Akun Telegram: https://t.me/brianwaruwu03

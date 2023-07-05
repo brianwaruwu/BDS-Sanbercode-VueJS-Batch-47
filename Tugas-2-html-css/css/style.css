@@ -1,0 +1,50 @@
+header {
+    background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+body {
+    margin: 0px;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+}
+
+li {
+    display: inline;
+    margin-right: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+}
+
+main {
+    margin: 100px 250px;
+    background-color: aqua;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 30px;
+    box-shadow: 10px 10px 8px lightblue;
+}
+
+h1 {
+    text-align: center;
+}
+
+section.section-1 {
+    display: nonSe;
+    justify-content: space-around;
+}
+
+img.image-profile {
+    border-radius: 40px;
+}

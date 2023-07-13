@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>VueJS Course</title>
+    <link rel="stylesheet" type="text/css" href="main.css" :key="bird" />
+</head>
+
+<body>
+    <div id="app">
+        <ul v-for="animal in animals">
+            <li>
+                {{animal}}
+            </li>
+        </ul>
+
+        <hr>
+
+        <ul v-for="peoples in people">
+            <li>
+                <div>nama : {{peoples.name}} </div>
+                <div>age : {{peoples.age}} </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let vm = Vue.createApp({
+            data() {
+                return {
+                    animals: ['Kucing', 'Kelinci', 'Ayam', 'Anggsa'],
+                    people: [{
+                        name: 'Rezky',
+                        age: 26
+                    }, {
+                        name: 'Andi',
+                        age: 18
+                    }, {
+                        name: 'Budi',
+                        age: 33
+                    }]
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

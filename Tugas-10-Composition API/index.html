@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Composition API</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <ul v-if="ErrorHanddling.errors.length">
+            <li v-for="error in ErrorHanddling.errors">{{ error }}</li>
+        </ul>
+        <form @submit.prevent="handleSubmit">
+            <label>Username</label>
+            <input type="text" v-model="objectUser.username">
+            <br/>
+            <label>Password</label>
+            <input type="password" v-model="objectUser.password">
+            <br/>
+            <input type="submit" value="Submit">
+        </form>
+        <h1>Output</h1>
+        <ul v-if="output.length">
+            <li v-for="out in output">{{ out }}</li>
+        </ul>
+    </div>
+
+    <script>
+        const {
+            createApp,
+            ref,
+            reactive
+        } = Vue;
+
+        createApp({
+            setup() {
+
+
+                const objectUser = reactive({
+                    username: "",
+                    password: "",
+                });
+                const ErrorHanddling = reactive({
+                    errors: [],
+                });
+
+                const output = ref([]);
+
+                const validationForm = () => {
+                    ErrorHanddling.errors = [];
+                    output.value = [];
+
+                    if (objectUser.username.length < 8) {
+                        ErrorHanddling.errors.push("username tidak boleh kurang dari 8 karakter");
+                    }
+                    if (objectUser.password.length < 8) {
+                        ErrorHanddling.errors.push("password tidak boleh kurang dari 8 karakter");
+                    }
+                };
+
+                const clearForm = () => {
+                    objectUser.username = "";
+                    objectUser.password = "";
+                };
+
+                const handleSubmit = () => {
+                    validationForm();
+                    if (ErrorHanddling.errors.length === 0) {
+                        output.value.push(objectUser.username, objectUser.password);
+                    }
+                };
+
+                return {
+                    objectUser,
+                    handleSubmit,
+                    ErrorHanddling,
+                    output,
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

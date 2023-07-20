@@ -1,58 +1,30 @@
 
 <template>
-  <main class="container">
+  <div v-if="!todo.data.length">
+<div class="container my-auto mx-auto">
+<div class="spinner-border text-danger" role="status">
+  <span class="sr-only">Loading....</span>
+</div>
+</div>
+  </div>
+  <main v-else class="container">
     <div class="row">
       <div class="col">
-        <table class="table">
-          <thead class="thead-dark">
-            <tr>
-              <th>Title</th>
-              <th>Content</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="item in todo.data">
-              <td>{{ item.title }}</td>
-              <td>{{ item.content }}</td>
-              <td>
-                <button type="submit" @click="updateData(item)" class="btn btn-primary btn-sm mr-3">Edit</button>
-                <button type="submit" @click="deleteData(item.id)" class="btn btn-danger btn-sm">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-
-        </table>
+        <TableInput :data="todo.data" @update="updateData" @delete="deleteData"></TableInput>
       </div>
       <div class="col">
-        <form @submit.prevent="handleSubmit">
-          <div class="form-group">
-            <label>Title</label>
-            <input v-model="todo.title" type="text" class="form-control" id="inputTitle" aria-describedby="title">
-          </div>
-          <div class="form-group">
-            <label>Content</label>
-            <textarea v-model="todo.content" class="form-control" rows="5" id="inputContent"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary mr-3" :class="update ? 'btn-warning' : 'btn-primary'">
-            {{ update ? "Update" : "Add" }}
-          </button>
-          <button v-if="update" @click="clearInput" type="button" class="btn btn-danger">
-            Cancel
-          </button>
-        </form>
+        <FormInput :todo="todo" :update="update" @handleSubmit="handleSubmit" @clearInput="clearInput"></FormInput>
       </div>
     </div>
   </main>
 </template>
 
-
 <script setup>
 import { reactive, onMounted, ref } from 'vue';
 import { db, timestamp } from "../config/firebaseconfig";
 import { addDoc, collection, onSnapshot, orderBy, query, updateDoc, doc, deleteDoc } from "firebase/firestore";
-
+import TableInput from "../components/Table.vue";
+import FormInput from "../components/FormInput.vue";
 let todo = reactive({
   title: "",
   content: "",

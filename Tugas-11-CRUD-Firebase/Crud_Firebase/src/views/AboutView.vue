@@ -6,6 +6,7 @@
     <main>
 
         <h1>My Biodata</h1>
+        <p>Nilai Keranjang {{ counter.count }}</p>
         <section class="section-1">
             <div>
                 <p>Nama : Brian Alfret Bohouni Waruwu</p>
@@ -28,6 +29,11 @@
 </html>
 </template>
 
+<script setup>
+import { useCounterStore } from "../stores/counter";
+    
+const counter = useCounterStore();
+</script>
 <style scoped>
 header {
     background-color: aqua;

@@ -10,8 +10,8 @@
   <p>Jumlah keranjang bernilai : {{ counter.Ganjilataugenap }}</p>
 </template>
 <script setup>
-import { useCounterStore } from "../stores/counter";
+import { useOtherStore } from "../stores/counter";
 
 
-const counter = useCounterStore();
+const counter = useOtherStore();
 </script>

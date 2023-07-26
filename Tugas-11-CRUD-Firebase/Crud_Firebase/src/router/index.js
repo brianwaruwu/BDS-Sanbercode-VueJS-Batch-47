@@ -25,7 +25,7 @@ const router = createRouter({
             path: '/post',
             name: 'post',
             component: PostView,
-            meta: { requiredAuth: true },
+            meta: { requiredAuth: false },
 
         },
     ]
@@ -34,7 +34,7 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
     let user = {
-        login: true,
+        login: false,
         role: 'admin'
     }
     if (to.meta.requiredAuth) {

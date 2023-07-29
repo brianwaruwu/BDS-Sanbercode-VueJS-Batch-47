@@ -1,7 +1,6 @@
 <template>
     <main>
       <h1>My Biodata</h1>
-      <p>Nilai Keranjang {{ counter.count }}</p>
       <section class="section-1">
         <div>
           <p>Nama : Brian Alfret Bohouni Waruwu</p>
@@ -16,42 +15,12 @@
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </section>
-      <section>
-        <h2>Data Tabel</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Nama</th>
-              <th>Alamat</th>
-              <th>Hobi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(data, index) in post.todo.data" :key="index">
-              <td>{{ index + 1 }}</td>
-              <td>{{ data.title }}</td>
-              <td>{{ data.content }}</td>
-              <!-- Ganti "title" dan "content" dengan properti yang sesuai dari data Anda -->
-              <!-- Misalnya, jika properti dari data Anda adalah "name" dan "address", maka gantilah dengan "data.name" dan "data.address" -->
-              <td>{{ data.hobi }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+
     </main>
   </template>
   
   <script setup>
-  import { onBeforeMount } from 'vue';
-  import { useCounterStore } from "../stores/post"; // Ganti "../stores/post" dengan path yang sesuai
-  import { useOtherStore } from "../stores/counter"
-  const post = useCounterStore();
-  const counter = useOtherStore();
-  
-  onBeforeMount(() => {
-    post.readData();
-  });
+
   </script>
 
 

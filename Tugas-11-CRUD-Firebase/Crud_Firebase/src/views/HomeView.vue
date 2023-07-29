@@ -1,17 +1,36 @@
 <template>
-  <h1>Halaman Dashboard</h1>
-  <button @click="counter.minCard(1)" class="btn btn-danger mr-3">-</button>
-  <button @click="counter.minCard(2)" class="btn btn-danger">--</button>
-  <p>Nilai Keranjang {{ counter.count }}</p>
-  <button @click="counter.addCard(1)" class="btn btn-primary mr-3">+</button>
-  <button @click="counter.addCard(2)" class="btn btn-primary">++</button>
 
+  <v-card v-for="(item, index) in post.todo.data" :key="index" class="mx-auto" max-width="344">
+    <v-img :src="item.image" height="100px" width="800px"></v-img>
+    <v-card-title>
+      {{ item.title }}
+    </v-card-title>
+    <v-card-actions>
+      <v-btn :icon="item.open ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="toggleCard(index)"></v-btn>
+    </v-card-actions>
 
-  <p>Jumlah keranjang bernilai : {{ counter.Ganjilataugenap }}</p>
+    <v-expand-transition>
+      <div v-show="item.open">
+        <v-divider></v-divider>
+
+        <v-card-text>
+          {{ item.content }}
+        </v-card-text>
+      </div>
+    </v-expand-transition>
+  </v-card>
 </template>
+
 <script setup>
-import { useOtherStore } from "../stores/counter";
+import { onBeforeMount, ref } from 'vue';
+import { useCounterStore } from "../stores/post"; // Ganti "../stores/post" dengan path yang sesuai
+const post = useCounterStore();
 
+const toggleCard = (index) => {
+  post.todo.data[index].open = !post.todo.data[index].open;
+};
 
-const counter = useOtherStore();
+onBeforeMount(() => {
+  post.readData();
+});
 </script>

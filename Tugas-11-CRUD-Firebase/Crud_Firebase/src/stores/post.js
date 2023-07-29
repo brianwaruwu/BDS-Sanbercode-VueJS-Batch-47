@@ -7,6 +7,7 @@ export const useCounterStore = defineStore('post', {
         todo: {
             title: "",
             content: "",
+            image: "",
             id: "",
             data: [],
         },
@@ -17,6 +18,7 @@ export const useCounterStore = defineStore('post', {
         clearInput() {
             this.todo.title = "";
             this.todo.content = "";
+            this.todo.image = "";
             this.todo.id = "";
             this.update = false;
         },
@@ -25,6 +27,7 @@ export const useCounterStore = defineStore('post', {
             this.update = true;
             this.todo.title = items.title;
             this.todo.content = items.content;
+            this.todo.image = items.image;
             this.todo.id = items.id;
             console.log(items);
         },
@@ -44,6 +47,7 @@ export const useCounterStore = defineStore('post', {
                         id: doc.id,
                         title: doc.data().title,
                         content: doc.data().content,
+                        image: doc.data().image,
                     };
                     todos.push(todoItem);
                 });
@@ -57,6 +61,7 @@ export const useCounterStore = defineStore('post', {
                 await updateDoc(doc(db, "todos", id), {
                     title: this.todo.title,
                     content: this.todo.content,
+                    image: this.todo.image,
                     updateAt: timestamp,
                 });
                 alert("Berhasil Diperbarui");
@@ -64,6 +69,7 @@ export const useCounterStore = defineStore('post', {
                 await addDoc(collection(db, "todos"), {
                     title: this.todo.title,
                     content: this.todo.content,
+                    image: this.todo.image,
                     createAt: timestamp,
                     updatedAt: timestamp,
                 });

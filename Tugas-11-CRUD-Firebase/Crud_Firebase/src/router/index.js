@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import PostView from '../views/PostView.vue'
-
+import AuthView from '../views/AuthView.vue'
+import { useAuthStore } from '../stores/authStore'
 const router = createRouter({
     history: createWebHistory(
         import.meta.env.BASE_URL),
@@ -9,6 +10,12 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: HomeView
+
+        },
+        {
+            path: '/auth',
+            name: 'auth',
+            component: AuthView
 
         },
         {
@@ -25,24 +32,24 @@ const router = createRouter({
             path: '/post',
             name: 'post',
             component: PostView,
-            meta: { requiredAuth: false },
+            meta: { requiredAuth: "true" },
 
         },
+
     ]
 })
 
 
 router.beforeEach((to, from) => {
-    let user = {
-        login: false,
-        role: 'admin'
-    }
+    const userStore = useAuthStore()
+
     if (to.meta.requiredAuth) {
-        if (!user.login || user.role != 'admin')
+        if (!userStore.user.email || !userStore.user.id) {
             console.log(user);
-        alert("hanya bisa diakses oleh admint")
-        return {
-            path: '/'
+            alert("hanya bisa diakses bila sudah login ")
+            return {
+                path: '/'
+            }
         }
     }
 })

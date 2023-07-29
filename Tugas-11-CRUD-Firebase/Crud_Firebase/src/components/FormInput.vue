@@ -1,20 +1,28 @@
 <template>
-    <form @submit.prevent="$emit('handleSubmit')">
-          <div class="form-group">
-            <label>Title</label>
-            <input v-model="todo.title" type="text" class="form-control" id="inputTitle" aria-describedby="title">
-          </div>
-          <div class="form-group">
-            <label>Content</label>
-            <textarea v-model="todo.content" class="form-control" rows="5" id="inputContent"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary mr-3" :class="update ? 'btn-warning' : 'btn-primary'">
+<v-card
+    prepend-icon="mdi-home">
+  <template v-slot:title>
+    v-form Input
+    </template>
+  <v-card-text>
+    <v-form @submit.prevent="$emit('handleSubmit')">
+         <v-text-field type="text" label="Title" v-model="todo.title">
+         </v-text-field>
+         <v-text-field type="text" label="Image" v-model="todo.image">
+         </v-text-field>  
+            <v-textarea v-model="todo.content" class="v-form-control" label="Content"></v-textarea>
+          <v-btn type="submit" block class="mt-2" :color="update ? 'blue' : 'info'">
             {{ update ? "Update" : "Add" }}
-          </button>
-          <button v-if="update" @click="$emit('clearInput')" type="button" class="btn btn-danger">
+          </v-btn>
+          <v-btn type="submit" block class="mt-2" v-if="update" @click="$emit('clearInput')" color="red">
             Cancel
-          </button>
-        </form>
+          </v-btn>
+        </v-form>
+  </v-card-text>
+</v-card>
+
+
+  
 </template>
 
 <script setup>
@@ -27,3 +35,5 @@ const props = defineProps({
     }
 });
 </script>
+
+
